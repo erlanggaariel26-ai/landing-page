@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Video Viral Hari Ini</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0f172a;
+        color: #fff;
+        text-align: center;
+      }
+
+      h3 {
+        margin-top: 20px;
+        font-size: 20px;
+      }
+
+      .sub {
+        color: #94a3b8;
+        font-size: 14px;
+      }
+
+      .phone {
+        max-width: 420px;
+        margin: 20px auto;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #000;
+        position: relative;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      }
+
+      video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        background: #000;
+        cursor: pointer;
+      }
+
+      .overlay {
+        position: absolute;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        font-size: 16px;
+        padding: 20px;
+        pointer-events: none;
+      }
+
+      .overlay.active {
+        display: flex;
+        pointer-events: auto;
+      }
+
+      .badge {
+        background: red;
+        padding: 3px 8px;
+        font-size: 12px;
+        border-radius: 6px;
+        margin-left: 6px;
+      }
+
+      .meta {
+        font-size: 13px;
+        color: #94a3b8;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h3>🔥 Video Ini Lagi Viral <span class="badge">HOT</span></h3>
+    <div class="sub">Banyak yang gagal nonton sampai akhir...</div>
+
+    <div class="phone">
+      <video id="video" playsinline preload="metadata">
+        <source src="https://cdn2.videy.co/pne0IdPn1.mp4" type="video/mp4" />
+      </video>
+
+      <div id="step2" class="overlay">
+        🔒 Buka bagian sensitif<br /><small>(Tap sekali lagi)</small>
+      </div>
+
+      <div id="step3" class="overlay">
+        ⚠️ Hampir selesai...<br /><small>Tap terakhir untuk lanjut</small>
+      </div>
+    </div>
+
+    <div class="meta">👁️ 1.2jt views • 2 jam lalu</div>
+
+    <script>
+      let clickStep = 0;
+
+      const video = document.getElementById("video");
+      const step2 = document.getElementById("step2");
+      const step3 = document.getElementById("step3");
+
+      const ADS = [
+        "https://www.profitablecpmratenetwork.com/ugjpmw8kv?key=c748a6c579d04d4b06f9b5ac31722a1c", // Adsterra
+        "https://plump-plastic.com/7jKafX", // Hilltop
+        "https://omg10.com/4/10829911", // Montega
+      ];
+
+      function openAd(url) {
+        let a = document.createElement("a");
+        a.href = url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
+
+      // 🔥 Klik pertama (play + ads 1)
+      video.onclick = function () {
+        if (clickStep === 0) {
+          openAd(ADS[0]);
+          video.play();
+          clickStep = 1;
+        }
+      };
+
+      // 🔥 Trigger step berikutnya
+      video.addEventListener("timeupdate", function () {
+        if (video.currentTime > 5 && clickStep === 1) {
+          step2.classList.add("active");
+          video.pause();
+        }
+
+        if (video.currentTime > 10 && clickStep === 2) {
+          step3.classList.add("active");
+          video.pause();
+        }
+      });
+
+      // 🔥 Klik ke-2
+      step2.onclick = function () {
+        if (clickStep === 1) {
+          openAd(ADS[1]);
+          clickStep = 2;
+          step2.classList.remove("active");
+          video.play();
+        }
+      };
+
+      // 🔥 Klik ke-3
+      step3.onclick = function () {
+        if (clickStep === 2) {
+          openAd(ADS[2]);
+          clickStep = 3;
+          step3.classList.remove("active");
+          video.play();
+        }
+      };
+    </script>
+  </body>
+</html>
